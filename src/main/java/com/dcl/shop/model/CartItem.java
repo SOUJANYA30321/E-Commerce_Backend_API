@@ -18,7 +18,7 @@ import lombok.Setter;
 public class CartItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cart_item_id;
+	private int cartItemId;
 	
 	@Column(nullable = false)
 	private int quantity;
@@ -27,11 +27,11 @@ public class CartItem {
 	private double price;
 	
 	@ManyToOne
-	@JoinColumn(name = "product_id")
+	@JoinColumn(name = "productId")
 	private Product product;
 	
 	@ManyToOne
-	@JoinColumn(name = "cart_id")
+	@JoinColumn(name = "cartId")
 	private Cart cart;
 	
 }

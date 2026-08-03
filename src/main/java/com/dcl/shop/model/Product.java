@@ -22,10 +22,10 @@ import lombok.Setter;
 public class Product {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int product_id;
+	private int productId;
 	
 	@Column(nullable = false)
-	private String product_name;
+	private String productName;
 	
 	@Column(nullable = false)
 	private String description;
@@ -42,7 +42,7 @@ public class Product {
 	private String imageUrl;
 	
 	@ManyToOne
-	@JoinColumn(name = "category_id")
+	@JoinColumn(name = "categoryId")
 	private Category category;
 	
 	@OneToMany(mappedBy = "product", cascade = CascadeType.ALL)

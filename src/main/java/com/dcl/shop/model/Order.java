@@ -28,25 +28,25 @@ import lombok.Setter;
 public class Order {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int order_id;
+	private int orderId;
 	
 	@Column(nullable = false)
-	private LocalDateTime order_date;
+	private LocalDateTime orderDate;
 	
 	@Column(nullable = false)
-	private double total_amount;
+	private double totalAmount;
 	
 	@Enumerated(EnumType.STRING)
-	private OrderStatus order_status;
+	private OrderStatus orderStatus;
 	
 	@Enumerated(EnumType.STRING)
-	private PaymentStatus payment_status;
+	private PaymentStatus paymentStatus;
 	
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
 	private List<OrderItem> orderItems;
 	
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "userId")
 	private User user;
 	
 }

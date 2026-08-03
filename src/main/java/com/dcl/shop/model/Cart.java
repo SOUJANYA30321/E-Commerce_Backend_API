@@ -22,12 +22,12 @@ public class Cart {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int cart_id;
+	private int cartId;
 	
 	@OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
 	private List<CartItem> cartItems;
 	
 	@OneToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "userId")
 	private User user;
 }

@@ -19,7 +19,7 @@ public class Review {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int review_id;
+	private int reviewId;
 	
 	@Column(nullable = false)
 	private int rating;
@@ -28,10 +28,10 @@ public class Review {
 	private String comment;
 
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+	@JoinColumn(name = "userId")
 	private User user;
 	
 	@ManyToOne
-	@JoinColumn(name = "product_id")
+	@JoinColumn(name = "productId")
 	private Product product;
 }
