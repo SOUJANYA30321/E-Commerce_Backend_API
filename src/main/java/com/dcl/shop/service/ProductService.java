@@ -20,7 +20,7 @@ public interface ProductService {
 
 	Product findProductByName(String productName);
 
-	List<Product> searchProductsByKeyword(String productName);
+	List<Product> searchProductsByKeyword(String keyword);
 
 	List<Product> findProductsByBrand(String brand);
 

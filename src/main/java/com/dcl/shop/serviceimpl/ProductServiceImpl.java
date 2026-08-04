@@ -100,8 +100,8 @@ public class ProductServiceImpl implements ProductService{
 	}
 
 	@Override
-	public List<Product> searchProductsByKeyword(String productName) {
-		List<Product> productList = repository.findByProductNameContainingIgnoreCase(productName);
+	public List<Product> searchProductsByKeyword(String keyword) {
+		List<Product> productList = repository.findByProductNameContainingIgnoreCase(keyword);
 		
 		if(productList.isEmpty()) {
 			throw new ProductNotFoundByNameException("NO PRODUCT FOUND");

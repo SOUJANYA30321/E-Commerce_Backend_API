@@ -98,13 +98,13 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<Product>>(rs, HttpStatus.OK);
 	}
 	
-	@GetMapping("/products/search/{keyword}")
-	public ResponseEntity<ResponseStructure<List<Product>>> searchProductsByKeyword(@PathVariable("keyword") String productName){
-		List<Product> foundProduct = service.searchProductsByKeyword(productName);
+	@GetMapping("/products/search")
+	public ResponseEntity<ResponseStructure<List<Product>>> searchProductsByKeyword(@RequestParam String keyword){
+		List<Product> foundProduct = service.searchProductsByKeyword(keyword);
 		
 		ResponseStructure<List<Product>> rs = new ResponseStructure<List<Product>>();
 		rs.setStatusCode(HttpStatus.OK.value());
-		rs.setMessage("Product found successfully for the requested keyword: "+productName);
+		rs.setMessage("Product found successfully for the requested keyword: "+ keyword);
 		rs.setData(foundProduct);
 		
 		return new ResponseEntity<ResponseStructure<List<Product>>>(rs, HttpStatus.OK);

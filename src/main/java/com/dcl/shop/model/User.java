@@ -2,9 +2,13 @@ package com.dcl.shop.model;
 
 import java.util.List;
 
+import com.dcl.shop.enums.UserRole;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,7 +30,7 @@ public class User {
 	@Column(nullable = false)
 	private String name;
 
-	@Column(nullable = false)
+	@Column(nullable = false, unique = true)
 	private String email;
 	
 	@Column(nullable = false)
@@ -38,8 +42,9 @@ public class User {
 	@Column(nullable = false)
 	private String address;
 
+	@Enumerated(EnumType.STRING)
 	@Column(nullable = false)
-	private String role;
+	private UserRole role;
 
 	@OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
 	private Cart cart;

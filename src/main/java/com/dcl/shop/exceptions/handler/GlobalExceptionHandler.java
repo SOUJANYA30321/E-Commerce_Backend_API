@@ -15,6 +15,10 @@ import com.dcl.shop.exceptions.ProductNotFoundByIdException;
 import com.dcl.shop.exceptions.ProductNotFoundByNameException;
 import com.dcl.shop.exceptions.ProductNotFoundByPriceRangeException;
 import com.dcl.shop.exceptions.ProductsNotFoundException;
+import com.dcl.shop.exceptions.UserNotFoundByUserIdException;
+import com.dcl.shop.exceptions.UserNotFoundEmailException;
+import com.dcl.shop.exceptions.UserNotFoundNameException;
+import com.dcl.shop.exceptions.UsersNotFoundException;
 import com.dcl.shop.exceptions.CategoriesNotFoundException;
 import com.dcl.shop.util.ErrorStructure;
 
@@ -143,6 +147,50 @@ public class GlobalExceptionHandler {
 		es.setErrorMessage("Product with the requested price range does not exist in the database.");
 		es.setError(exception.getMessage());
 
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(UsersNotFoundException.class)
+	public ResponseEntity<ErrorStructure<String>> handleUsersNotFoundException(UsersNotFoundException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("No user exists in the database.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(UserNotFoundByUserIdException.class)
+	public ResponseEntity<ErrorStructure<String>> handleUserNotFoundByUserIdException(UserNotFoundByUserIdException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("No user exists in the database for the requested user id.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(UserNotFoundEmailException.class)
+	public ResponseEntity<ErrorStructure<String>> handleUserNotFoundEmailException(UserNotFoundEmailException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("No user exists in the database for the requested email.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(UserNotFoundNameException.class)
+	public ResponseEntity<ErrorStructure<String>> handleUserNotFoundNameException(UserNotFoundNameException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("No user exists in the database for the requested name.");
+		es.setError(exception.getMessage());
+		
 		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
 	}
 }
