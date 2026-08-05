@@ -11,9 +11,9 @@ import org.springframework.stereotype.Service;
 import com.dcl.shop.exceptions.ProductNotFoundByBrandException;
 import com.dcl.shop.exceptions.ProductNotFoundByCategoryException;
 import com.dcl.shop.exceptions.ProductNotFoundByCategoryNameException;
-import com.dcl.shop.exceptions.ProductNotFoundByIdException;
 import com.dcl.shop.exceptions.ProductNotFoundByNameException;
 import com.dcl.shop.exceptions.ProductNotFoundByPriceRangeException;
+import com.dcl.shop.exceptions.ProductNotFoundByProductIdException;
 import com.dcl.shop.exceptions.ProductsNotFoundException;
 import com.dcl.shop.model.Product;
 import com.dcl.shop.repository.ProductRepository;
@@ -47,7 +47,7 @@ public class ProductServiceImpl implements ProductService{
 		Optional<Product> optional = repository.findByProductId(productId);
 		
 		if(optional.isEmpty()) {
-			throw new ProductNotFoundByIdException("NO PRODUCT FOUND");
+			throw new ProductNotFoundByProductIdException("NO PRODUCT FOUND");
 		} else {
 			return optional.get();
 		}
@@ -59,7 +59,7 @@ public class ProductServiceImpl implements ProductService{
 	    Optional<Product> optional = repository.findByProductId(productId);
 
 	    if (optional.isEmpty()) {
-	        throw new ProductNotFoundByIdException("NO PRODUCT FOUND");
+	        throw new ProductNotFoundByProductIdException("NO PRODUCT FOUND");
 	    }
 
 	    Product existingProduct = optional.get();
@@ -80,7 +80,7 @@ public class ProductServiceImpl implements ProductService{
 		Optional<Product> optional = repository.findByProductId(productId);
 		
 		if(optional.isEmpty()) {
-			throw new ProductNotFoundByIdException("NO PRODUCT FOUND");
+			throw new ProductNotFoundByProductIdException("NO PRODUCT FOUND");
 		} else {
 			Product existingProduct = optional.get();
 			repository.delete(existingProduct);

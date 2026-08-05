@@ -1,0 +1,10 @@
+package com.dcl.shop.exceptions;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+@AllArgsConstructor
+@Getter
+public class CartItemNotFoundException extends RuntimeException {
+	private String message;
+}

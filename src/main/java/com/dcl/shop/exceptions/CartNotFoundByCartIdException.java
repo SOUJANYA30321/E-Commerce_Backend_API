@@ -5,6 +5,6 @@ import lombok.Getter;
 
 @AllArgsConstructor
 @Getter
-public class ProductNotFoundByIdException extends RuntimeException {
+public class CartNotFoundByCartIdException extends RuntimeException {
 	private String message;
 }

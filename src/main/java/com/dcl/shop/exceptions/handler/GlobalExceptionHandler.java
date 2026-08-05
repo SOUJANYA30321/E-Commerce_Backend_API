@@ -11,7 +11,7 @@ import com.dcl.shop.exceptions.CategoryNotFoundBySearchedLettersException;
 import com.dcl.shop.exceptions.ProductNotFoundByBrandException;
 import com.dcl.shop.exceptions.ProductNotFoundByCategoryException;
 import com.dcl.shop.exceptions.ProductNotFoundByCategoryNameException;
-import com.dcl.shop.exceptions.ProductNotFoundByIdException;
+import com.dcl.shop.exceptions.ProductNotFoundByProductIdException;
 import com.dcl.shop.exceptions.ProductNotFoundByNameException;
 import com.dcl.shop.exceptions.ProductNotFoundByPriceRangeException;
 import com.dcl.shop.exceptions.ProductsNotFoundException;
@@ -19,12 +19,18 @@ import com.dcl.shop.exceptions.UserNotFoundByUserIdException;
 import com.dcl.shop.exceptions.UserNotFoundEmailException;
 import com.dcl.shop.exceptions.UserNotFoundNameException;
 import com.dcl.shop.exceptions.UsersNotFoundException;
+import com.dcl.shop.exceptions.CartItemNotFoundException;
+import com.dcl.shop.exceptions.CartNotFoundByCartIdException;
+import com.dcl.shop.exceptions.CartNotFoundByUserIdException;
+import com.dcl.shop.exceptions.CartNotFoundException;
 import com.dcl.shop.exceptions.CategoriesNotFoundException;
 import com.dcl.shop.util.ErrorStructure;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
+	/* ************************************ CATEGORY EXCEPTIONS ************************************ */
+	
 	@ExceptionHandler(CategoriesNotFoundException.class)
 	public ResponseEntity<ErrorStructure<String>> handleCategoriesNotFoundException(
 			CategoriesNotFoundException exception) {
@@ -72,7 +78,11 @@ public class GlobalExceptionHandler {
 
 		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
 	}
+	
 
+	/* ************************************ PRRODUCT EXCEPTIONS ************************************ */
+	
+	
 	@ExceptionHandler(ProductsNotFoundException.class)
 	public ResponseEntity<ErrorStructure<String>> handleProductsNotFoundException(ProductsNotFoundException exception) {
 		ErrorStructure<String> es = new ErrorStructure<String>();
@@ -84,8 +94,8 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
 	}
 
-	@ExceptionHandler(ProductNotFoundByIdException.class)
-	public ResponseEntity<ErrorStructure<String>> handleProductNotFoundByIdException(ProductNotFoundByIdException exception) {
+	@ExceptionHandler(ProductNotFoundByProductIdException.class)
+	public ResponseEntity<ErrorStructure<String>> handleProductNotFoundByProductIdException(ProductNotFoundByProductIdException exception) {
 		ErrorStructure<String> es = new ErrorStructure<String>();
 
 		es.setErrorCode(HttpStatus.NOT_FOUND.value());
@@ -150,6 +160,10 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
 	}
 	
+	
+	/* ************************************** USER EXCEPTIONS ************************************** */
+	
+	
 	@ExceptionHandler(UsersNotFoundException.class)
 	public ResponseEntity<ErrorStructure<String>> handleUsersNotFoundException(UsersNotFoundException exception) {
 		ErrorStructure<String> es = new ErrorStructure<String>();
@@ -189,6 +203,54 @@ public class GlobalExceptionHandler {
 		
 		es.setErrorCode(HttpStatus.NOT_FOUND.value());
 		es.setErrorMessage("No user exists in the database for the requested name.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	
+	/* ************************************ CART EXCEPTIONS ************************************ */
+	
+	
+	@ExceptionHandler(CartNotFoundByUserIdException.class)
+	public ResponseEntity<ErrorStructure<String>> handleCartNotFoundByUserIdException(CartNotFoundByUserIdException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("No cart exists in the database for the requested user Id.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(CartNotFoundException.class)
+	public ResponseEntity<ErrorStructure<String>> handleCartNotFoundException(CartNotFoundException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("No cart exists in the database.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(CartItemNotFoundException.class)
+	public ResponseEntity<ErrorStructure<String>> handleCartItemNotFoundException(CartItemNotFoundException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("Cart Item does not exist in the database.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(CartNotFoundByCartIdException.class)
+	public ResponseEntity<ErrorStructure<String>> handleCartNotFoundByCartIdException(CartNotFoundByCartIdException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("Cart with the requested cart Id does not exist in the database.");
 		es.setError(exception.getMessage());
 		
 		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
