@@ -24,11 +24,15 @@ import lombok.AllArgsConstructor;
 public class UserServiceImpl implements UserService{
 	private final UserRepository repository;
 
+	
+	/*  ADD USER  */
 	@Override
 	public User addUser(User user) {
 		return repository.save(user);
 	}
 
+	
+	/*  DISPLAY ALL USERS  */
 	@Override
 	public List<User> displayAllUsers() {
 		List<User> existingUsersList = repository.findAll();
@@ -40,6 +44,8 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	
+	/*  FIND USER BY USER ID  */
 	@Override
 	public User findUserById(int userId) {
 		Optional<User> optional = repository.findByUserId(userId);
@@ -51,6 +57,8 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	
+	/*  UPDATE USER BY USER ID  */
 	@Override
 	public User updateUserById(int userId, User updatedUser) {
 		Optional<User> optional = repository.findByUserId(userId);
@@ -71,6 +79,8 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	
+	/*  DELETE USER BY USER ID  */
 	@Override
 	public User deleteUserById(int userId) {
 		Optional<User> optional = repository.findByUserId(userId);
@@ -84,6 +94,8 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	
+	/*  FIND USER BY USER EMAIL  */
 	@Override
 	public User findUserByEmail(String email) {
 		Optional<User> optional = repository.findByEmail(email);
@@ -95,6 +107,8 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	
+	/*  FIND USER BY USER NAME  */
 	@Override
 	public User findUserByName(String name) {
 		Optional<User> optional = repository.findByName(name);
@@ -106,6 +120,8 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	
+	/*  SEARCH USER  */
 	@Override
 	public List<User> searchUser(String keyword) {
 		List<User> usersFound = repository.findByNameContainingIgnoreCase(keyword);
@@ -117,11 +133,15 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	
+	/*  CHECK USER EXISTS BY EMAIL  */
 	@Override
 	public Boolean checkUserExistsByEmail(String email) {
 		return repository.existsByEmailIgnoreCase(email);
 	}
 
+	
+	/*  SORT USERS BY USER NAME  */
 	@Override
 	public List<User> sortUsersByName() {
 		List<User> usersList = repository.findAllByOrderByNameAsc();
@@ -133,6 +153,8 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	
+	/*  PAGE USERS  */
 	@Override
 	public Page<User> pageUsers(int page, int size) {
 		Pageable pageable = PageRequest.of(page, size);
@@ -146,6 +168,8 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	
+	/*  PAGE-SORT USERS  */
 	@Override
 	public Page<User> pageSortUsers(int page, int size, String sortBy, String direction) {
 		Sort sort = direction.equalsIgnoreCase("asc")? Sort.by(sortBy).ascending() : Sort.by(sortBy).descending();

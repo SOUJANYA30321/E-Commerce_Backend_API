@@ -1,5 +1,7 @@
 package com.dcl.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +34,7 @@ public class OrderItem {
 	
 	@ManyToOne
 	@JoinColumn(name = "orderId")
+	@JsonBackReference
 	private Order order;
 	
 }

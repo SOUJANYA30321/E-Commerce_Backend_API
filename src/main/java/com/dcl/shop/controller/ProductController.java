@@ -26,6 +26,8 @@ public class ProductController {
 	
 	private final ProductService service;
 	
+	
+	/*  ADD PRODUCT  */
 	@PostMapping("/products")
 	public ResponseEntity<ResponseStructure<Product>> addProduct(@RequestBody Product product) {
 		Product addedProduct = service.addProduct(product);
@@ -38,6 +40,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<Product>>(rs, HttpStatus.CREATED);
 	}
 	
+	
+	/*  DISPLAY ALL PRODUCTS  */
 	@GetMapping("/products")
 	public ResponseEntity<ResponseStructure<List<Product>>> displayAllProducts() {
 		List<Product> productsList = service.displayAllProducts();
@@ -50,6 +54,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<List<Product>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  DISPLAY PRODUCT BY PRODUCT ID  */
 	@GetMapping("/products/{id}")
 	public ResponseEntity<ResponseStructure<Product>> displayProductById(@PathVariable("id") int productId) {
 		Product product = service.displayProductById(productId);
@@ -62,6 +68,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<Product>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  UPDATE PRODUCT BY PRODUCT ID  */
 	@PutMapping("/products/{id}")
 	public ResponseEntity<ResponseStructure<Product>> updateProductById(@PathVariable("id") int productId, @RequestBody Product updatedProduct) {
 		Product modifiedProduct = service.updateProductById(productId, updatedProduct);
@@ -74,6 +82,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<Product>>(rs, HttpStatus.OK);
 	}
 
+	
+	/*  DELETE PRODUCT BY PRODUCT ID  */
 	@DeleteMapping("/products/{id}")
 	public ResponseEntity<ResponseStructure<Product>> deleteProductById(@PathVariable("id") int productId) {
 		Product deletedProduct = service.deleteProductById(productId);
@@ -86,6 +96,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<Product>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  FIND PRODUCT BY PRODUCT NAME  */
 	@GetMapping("/products/name/{name}")
 	public ResponseEntity<ResponseStructure<Product>> findProductByName(@PathVariable("name") String productName) {
 		Product foundProductByName = service.findProductByName(productName);
@@ -98,6 +110,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<Product>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  SEARCH PRODUCTS BY KEYWORD  */
 	@GetMapping("/products/search")
 	public ResponseEntity<ResponseStructure<List<Product>>> searchProductsByKeyword(@RequestParam String keyword){
 		List<Product> foundProduct = service.searchProductsByKeyword(keyword);
@@ -110,6 +124,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<List<Product>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  FIND PRODUCTS BY BRAND  */
 	@GetMapping("/products/brand/{brand}")
 	public ResponseEntity<ResponseStructure<List<Product>>> findProductsByBrand(@PathVariable("brand") String brand) {
 		List<Product> foundProductsByBrand = service.findProductsByBrand(brand);
@@ -122,6 +138,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<List<Product>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  FIND PRODUCTS BY CATEGORY ID  */
 	@GetMapping("/products/category/{categoryId}")
 	public ResponseEntity<ResponseStructure<List<Product>>> findProductsByCategory(@PathVariable int categoryId) {
 		List<Product> foundProductsByCategory = service.findProductsByCategory(categoryId);
@@ -134,6 +152,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<List<Product>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  FIND PRODUCTS BY CATEGORY NAME  */
 	@GetMapping("/products/category/name/{categoryName}")
 	public ResponseEntity<ResponseStructure<List<Product>>> findProductsByCategoryName(@PathVariable String categoryName) {
 		List<Product> foundProductsByCategoryName = service.findProductsByCategoryName(categoryName);
@@ -146,6 +166,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<List<Product>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/* FIND PRODUCTS BY PRICE RANGE  */
 	@GetMapping("/products/price/{minPrice}/{maxPrice}")
 	public ResponseEntity<ResponseStructure<List<Product>>> findProductsByPriceRange(@PathVariable("minPrice") double pricemin, @PathVariable("maxPrice") double pricemax) {
 		List<Product> foundProductsByPriceRange = service.findProductsByPriceRange(pricemin, pricemax);
@@ -158,6 +180,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<List<Product>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  SORT PRODUCTS BY PRICE ASCENDING  */
 	@GetMapping("/products/sort/price/asc")
 	public ResponseEntity<ResponseStructure<List<Product>>> sortProductsByPriceAscending() {
 		List<Product> sortedProductsByPriceAsc = service.sortProductsByPriceAscending();
@@ -170,6 +194,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<List<Product>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  SORT PRODUCTS BY PRICE DESCENDING  */
 	@GetMapping("/products/sort/price/desc")
 	public ResponseEntity<ResponseStructure<List<Product>>> sortProductsByPriceDescending() {
 		List<Product> sortedProductsByPriceDesc = service.sortProductsByPriceDescending();
@@ -182,6 +208,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<List<Product>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  SORT PRODUCTS BY NAME ASCENDING ORDER  */
 	@GetMapping("/products/sort/name/asc")
 	public ResponseEntity<ResponseStructure<List<Product>>> sortProductsByNameAsc() {
 		List<Product> sortedProductsByNameAsc = service.sortProductsByNameAsc();
@@ -194,6 +222,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<List<Product>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  CHECK PRODUCTS EXISTS  USING PRODUCT NAME  */
 	@GetMapping("/products/exists/{name}")
 	public ResponseEntity<ResponseStructure<Boolean>> findProductExists(@PathVariable("name") String productName) {
 		boolean productExists = service.findProductExists(productName);
@@ -206,6 +236,8 @@ public class ProductController {
 		return new ResponseEntity<ResponseStructure<Boolean>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  DISPLAY PRODUCTS WITH PAGINATION  */
 	@GetMapping("/products/page")
 	public ResponseEntity<ResponseStructure<Page<Product>>> displayProductsWithPagination(@RequestParam int page, @RequestParam int size) {
 		Page<Product> product = service.displayProductsWithPagination(page, size);

@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.dcl.shop.exceptions.CategoryNotFoundByIdException;
 import com.dcl.shop.exceptions.CategoryNotFoundByNameException;
 import com.dcl.shop.exceptions.CategoryNotFoundBySearchedLettersException;
+import com.dcl.shop.exceptions.OrderHistoryNotFoundException;
+import com.dcl.shop.exceptions.OrderNotFoundByOrderIdException;
+import com.dcl.shop.exceptions.OrdersNotFoundException;
 import com.dcl.shop.exceptions.ProductNotFoundByBrandException;
 import com.dcl.shop.exceptions.ProductNotFoundByCategoryException;
 import com.dcl.shop.exceptions.ProductNotFoundByCategoryNameException;
@@ -251,6 +254,44 @@ public class GlobalExceptionHandler {
 		
 		es.setErrorCode(HttpStatus.NOT_FOUND.value());
 		es.setErrorMessage("Cart with the requested cart Id does not exist in the database.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
+	/* ************************************ ORDER EXCEPTIONS ************************************ */
+	
+	
+	@ExceptionHandler(OrderNotFoundByOrderIdException.class)
+	public ResponseEntity<ErrorStructure<String>> handleOrderNotFoundByOrderIdException(OrderNotFoundByOrderIdException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("Failed to display the order since the requested order does not exist in the database.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(OrderHistoryNotFoundException.class)
+	public ResponseEntity<ErrorStructure<String>> handleOrderHistoryNotFoundException(OrderHistoryNotFoundException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("Order History does not exist for a requested userId.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(OrdersNotFoundException.class)
+	public ResponseEntity<ErrorStructure<String>> handleOrdersNotFoundException(OrdersNotFoundException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("No orders are present in the database.");
 		es.setError(exception.getMessage());
 		
 		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);

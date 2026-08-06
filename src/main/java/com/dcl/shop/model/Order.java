@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.dcl.shop.enums.OrderStatus;
 import com.dcl.shop.enums.PaymentStatus;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -43,6 +44,7 @@ public class Order {
 	private PaymentStatus paymentStatus;
 	
 	@OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
+	@JsonManagedReference
 	private List<OrderItem> orderItems;
 	
 	@ManyToOne

@@ -31,7 +31,6 @@ public class Cart {
 	private List<CartItem> cartItems;
 	
 	@OneToOne
-	@JoinColumn(name = "userId")
-	@JsonIgnore
+	@JoinColumn(name = "user_id")
 	private User user;
 }

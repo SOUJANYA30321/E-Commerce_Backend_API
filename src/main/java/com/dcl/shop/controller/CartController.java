@@ -24,6 +24,8 @@ import lombok.AllArgsConstructor;
 public class CartController {
 	private final CartService service;
 	
+	
+	/*  ADD CART  */
 	@PostMapping("/carts")
 	public ResponseEntity<ResponseStructure<Cart>> addCart(@RequestBody Cart cart) {
 		Cart addedCart = service.addCart(cart);
@@ -36,6 +38,8 @@ public class CartController {
 		return new ResponseEntity<ResponseStructure<Cart>>(rs, HttpStatus.CREATED);
 	}
 	
+	
+	/*  GET CART BY USER ID  */ 
 	@GetMapping("/carts/user/{userId}")
 	public ResponseEntity<ResponseStructure<Cart>> getCartByUserId(@PathVariable int userId) {
 		Cart userCart = service.getCartByUserId(userId);
@@ -63,6 +67,8 @@ public class CartController {
 		return new ResponseEntity<ResponseStructure<Cart>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/* UPDATE QUANTITY */
 	@PutMapping("/carts/{cartId}/products/{productId}")
 	public ResponseEntity<ResponseStructure<Cart>> updateQuantity(@PathVariable int cartId, @PathVariable int productId, @RequestBody CartItem updatedQuantity) {
 		Cart updatedCart = service.updateQuantity(cartId, productId, updatedQuantity);
@@ -75,6 +81,8 @@ public class CartController {
 		return new ResponseEntity<ResponseStructure<Cart>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/* DELETE PRODUCT */
 	@DeleteMapping("/carts/{cartId}/products/{productId}") 
 	public ResponseEntity<ResponseStructure<Cart>> removeProduct(@PathVariable int cartId, @PathVariable int productId){
 		Cart productRemoved = service.removeProduct(cartId, productId);
@@ -87,6 +95,9 @@ public class CartController {
 		return new ResponseEntity<ResponseStructure<Cart>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/* ************************************* IMPORTANT ************************************* */
+	/* VIEW CART */
 	@GetMapping("/carts/{cartId}")
 	public ResponseEntity<ResponseStructure<CartResponseDTO>> displayCartByCartId(@PathVariable int cartId) {
 		CartResponseDTO cartFound = service.displayCartByCartId(cartId);
@@ -99,6 +110,8 @@ public class CartController {
 		return new ResponseEntity<ResponseStructure<CartResponseDTO>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  CLEAR CART  */
 	@DeleteMapping("/carts/{cartId}")
 	public ResponseEntity<ResponseStructure<Cart>> clearCart(@PathVariable int cartId) {
 		Cart deletedCart = service.clearCart(cartId);

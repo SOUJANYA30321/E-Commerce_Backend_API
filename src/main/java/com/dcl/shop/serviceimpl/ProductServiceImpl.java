@@ -26,11 +26,15 @@ import lombok.AllArgsConstructor;
 public class ProductServiceImpl implements ProductService{
 	private final ProductRepository repository;
 
+	
+	/*  ADD PRODUCT  */
 	@Override
 	public Product addProduct(Product product) {
 		return repository.save(product);
 	}
 
+	
+	/*  DISPLAY ALL PRODUCTS  */
 	@Override
 	public List<Product> displayAllProducts()  {
 		List<Product> list = repository.findAll();
@@ -42,6 +46,8 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  DISPLAY PRODUCT BY PRODUCT ID  */
 	@Override
 	public Product displayProductById(int productId) {
 		Optional<Product> optional = repository.findByProductId(productId);
@@ -53,6 +59,8 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  UPDATE PRODUCT BY PRODUCT ID  */
 	@Override
 	public Product updateProductById(int productId, Product updatedProduct) {
 
@@ -75,6 +83,8 @@ public class ProductServiceImpl implements ProductService{
 	    return repository.save(existingProduct);
 	}
 
+	
+	/* DELETE PRODUCT BY PRODUCT ID  */
 	@Override
 	public Product deleteProductById(int productId) {
 		Optional<Product> optional = repository.findByProductId(productId);
@@ -88,6 +98,8 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  FIND PRODUCT BY PRODUCT NAME  */
 	@Override
 	public Product findProductByName(String productName) {
 		Optional<Product> optional = repository.findByProductNameIgnoreCase(productName);
@@ -99,6 +111,8 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  SEARCH PRODUCTS BY KEYWORD  */
 	@Override
 	public List<Product> searchProductsByKeyword(String keyword) {
 		List<Product> productList = repository.findByProductNameContainingIgnoreCase(keyword);
@@ -110,6 +124,8 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  FIND PRODUCTS BY BRAND  */
 	@Override
 	public List<Product> findProductsByBrand(String brand) {
 		List<Product> productList = repository.findByBrandIgnoreCase(brand);
@@ -121,6 +137,8 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  FIND PRODUCTS BY CATEGORY ID  */
 	@Override
 	public List<Product> findProductsByCategory(int categoryId) {
 		List<Product> productList = repository.findByCategoryCategoryId(categoryId);
@@ -132,6 +150,8 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  FIND PRODUCTS BY CATEGORY NAME  */
 	@Override
 	public List<Product> findProductsByCategoryName(String categoryName) {
 		List<Product> productList = repository.findByCategoryCategoryNameIgnoreCase(categoryName);
@@ -143,6 +163,8 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  FIND PRODUCTS BY PRICE RANGE  */
 	@Override
 	public List<Product> findProductsByPriceRange(double pricemin, double pricemax) {
 		List<Product> productList = repository.findByPriceBetween(pricemin, pricemax);
@@ -154,6 +176,8 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  SORT PRODUCTS BY PRICE IN ASCENDING ORDER  */
 	@Override
 	public List<Product> sortProductsByPriceAscending() {
 		List<Product> productList = repository.findAllByOrderByPriceAsc();
@@ -165,6 +189,8 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  SORT PRODUCTS BY PRICE IN DESCENDING ORDER  */
 	@Override
 	public List<Product> sortProductsByPriceDescending() {
 		List<Product> productList = repository.findAllByOrderByPriceDesc();
@@ -176,6 +202,8 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  SORT PRODUCTS BY NAME IN ASCENDING ORDER  */
 	@Override
 	public List<Product> sortProductsByNameAsc() {
 		List<Product> productList = repository.findAllByOrderByProductNameAsc();
@@ -187,11 +215,15 @@ public class ProductServiceImpl implements ProductService{
 		}
 	}
 
+	
+	/*  CHECK PRODUCT EXISTS USING PRODUCT NAME  */
 	@Override
 	public boolean findProductExists(String productName) {
 		return repository.existsByProductNameIgnoreCase(productName);			
 	}
 
+	
+	/*  DISPLAY PRODUCTS WITH PAGINATION  */
 	@Override
 	public Page<Product> displayProductsWithPagination(int page, int size) {
 

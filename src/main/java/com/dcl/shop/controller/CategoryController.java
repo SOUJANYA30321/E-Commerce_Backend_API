@@ -24,6 +24,8 @@ public class CategoryController {
 	
 	private final CategoryService service;
 	
+	
+	/*  ADD CATEGORY  */
 	@PostMapping("/categories")
 	public ResponseEntity<ResponseStructure<Category>> addCategory(@RequestBody Category category) {
 		Category savedCategory = service.addCategory(category);
@@ -37,6 +39,8 @@ public class CategoryController {
 		
 	}
 	
+	
+	/* DISPLAY ALL CATEGORIES  */
 	@GetMapping("/categories") 
 	public ResponseEntity<ResponseStructure<List<Category>>> displayAllCategories() {
 		List<Category> allCategories = service.displayAllCategories();
@@ -49,6 +53,8 @@ public class CategoryController {
 		return new ResponseEntity<ResponseStructure<List<Category>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  DISPLAY CATEGORY BY CATEGORY ID  */
 	@GetMapping("/categories/{id}")
 	public ResponseEntity<ResponseStructure<Category>> displayCategoryById(@PathVariable("id") int category_id) {
 		Category categoryFetchedById = service.displayCatgoryById(category_id);
@@ -62,6 +68,8 @@ public class CategoryController {
 		
 	}
 	
+	
+	/*  UPDATE CATEGORY BY CATEGORY ID  */
 	@PutMapping("/categories/{id}")
 	public ResponseEntity<ResponseStructure<Category>> updateCategoryById(@PathVariable("id") int category_id, @RequestBody Category updatedCategory) {
 		Category modifiedCategory = service.updateCategoryById(category_id, updatedCategory);
@@ -74,6 +82,8 @@ public class CategoryController {
 		return new ResponseEntity<ResponseStructure<Category>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  DELETE CATEGORY BY CATEGORY ID  */
 	@DeleteMapping("/categories/{id}")
 	public ResponseEntity<ResponseStructure<Category>> deleteCategoryById(@PathVariable("id") int category_id) {
 		Category deletedCategory = service.deleteCategoryById(category_id);
@@ -86,6 +96,8 @@ public class CategoryController {
 		return new ResponseEntity<ResponseStructure<Category>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/* FIND CATEGORY BY CATEGORY NAME  */
 	@GetMapping("/categories/name/{name}")
 	public ResponseEntity<ResponseStructure<Category>> findCategoryByName(@PathVariable("name") String category_name) {
 		Category categoryName = service.findCategoryByName(category_name);
@@ -98,6 +110,8 @@ public class CategoryController {
 		return new ResponseEntity<ResponseStructure<Category>>(rs, HttpStatus.OK);
 	}
 
+	
+	/*  SEARCH CATEGORY BY KEYWORD  */
 	@GetMapping("/categories/search/{name}")
 	public ResponseEntity<ResponseStructure<List<Category>>> searchCategoryByKeyword(@PathVariable("name") String categoryName) {
 		List<Category> matchingCategory = service.searchCategoryByKeyword(categoryName);
@@ -110,6 +124,8 @@ public class CategoryController {
 		return new ResponseEntity<ResponseStructure<List<Category>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  CHECK CATEGORY EXISTS  */
 	@GetMapping("/categories/exists/{name}")
 	public ResponseEntity<ResponseStructure<Boolean>> findCategoryExists(@PathVariable("name") String categoryName) {
 		boolean existingCategory = service.findCategoryExists(categoryName);

@@ -25,6 +25,8 @@ import lombok.AllArgsConstructor;
 public class UserController {
 	private final UserService service;
 	
+	
+	/*  ADD USER  */
 	@PostMapping("/users")
 	public ResponseEntity<ResponseStructure<User>> addUser(@RequestBody User user){
 		User addedUser = service.addUser(user);
@@ -37,6 +39,8 @@ public class UserController {
 		return new ResponseEntity<ResponseStructure<User>>(rs, HttpStatus.CREATED);
 	}
 	
+	
+	/*  DISPLAY ALL USERS  */
 	@GetMapping("/users")
 	public ResponseEntity<ResponseStructure<List<User>>> displayAllUsers() {
 		List<User> usersList = service.displayAllUsers();
@@ -49,6 +53,8 @@ public class UserController {
 		return new ResponseEntity<ResponseStructure<List<User>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  FIND USER BY USER ID  */
 	@GetMapping("/users/{id}")
 	public ResponseEntity<ResponseStructure<User>> findUserById(@PathVariable("id") int userId) {
 		User userFound = service.findUserById(userId);
@@ -61,6 +67,8 @@ public class UserController {
 		return new ResponseEntity<ResponseStructure<User>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  UPDATE USER BY USER ID  */
 	@PutMapping("/users/{id}") 
 	public ResponseEntity<ResponseStructure<User>> updateUserById(@PathVariable("id") int userId, @RequestBody User updatedUser) {
 		User userFound = service.updateUserById(userId, updatedUser);
@@ -73,6 +81,8 @@ public class UserController {
 		return new ResponseEntity<ResponseStructure<User>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  DELETE USER BY USER ID  */
 	@DeleteMapping("/users/{id}")
 	public ResponseEntity<ResponseStructure<User>> deleteUserById(@PathVariable("id") int userId) {
 		User userFound = service.deleteUserById(userId);
@@ -85,6 +95,8 @@ public class UserController {
 		return new ResponseEntity<ResponseStructure<User>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  FIND USER BY USER EMAIL  */
 	@GetMapping("/users/email/{email}")
 	public ResponseEntity<ResponseStructure<User>> findUserByEmail(@PathVariable("email") String email) {
 		User userFound = service.findUserByEmail(email);
@@ -97,6 +109,8 @@ public class UserController {
 		return new ResponseEntity<ResponseStructure<User>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  FIND USER BY USER NAME  */
 	@GetMapping("/users/name/{name}")
 	public ResponseEntity<ResponseStructure<User>> findUserByName(@PathVariable("name") String name) {
 		User userFound = service.findUserByName(name);
@@ -109,6 +123,8 @@ public class UserController {
 		return new ResponseEntity<ResponseStructure<User>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  SEARCH USERS USING KEYWORD  */
 	@GetMapping("/users/search")
 	public ResponseEntity<ResponseStructure<List<User>>> searchUsers(@RequestParam String keyword) {
 		List<User> usersFound = service.searchUser(keyword);
@@ -121,6 +137,8 @@ public class UserController {
 		return new ResponseEntity<ResponseStructure<List<User>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  CHECK USER EXISTS BY USER EMAIL  */
 	@GetMapping("/users/exists/{email}")
 	public ResponseEntity<ResponseStructure<Boolean>> checkUserExistsByEmail(@PathVariable("email") String email) {
 		Boolean userExists = service.checkUserExistsByEmail(email);
@@ -133,6 +151,8 @@ public class UserController {
 		return new ResponseEntity<ResponseStructure<Boolean>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  SORT USERS BY USER NAME  */
 	@GetMapping("/users/sort/name")
 	public ResponseEntity<ResponseStructure<List<User>>> sortUsersByName(){
 		List<User> usersList = service.sortUsersByName();
@@ -145,6 +165,8 @@ public class UserController {
 		return new ResponseEntity<ResponseStructure<List<User>>>(rs, HttpStatus.OK);
 	}
 
+	
+	/* PAGE USERS  */
 	@GetMapping("/users/page")
 	public ResponseEntity<ResponseStructure<Page<User>>> pageUsers(@RequestParam int page, @RequestParam int size) {
 		Page<User> user = service.pageUsers(page, size);
@@ -157,6 +179,8 @@ public class UserController {
 		return new ResponseEntity<ResponseStructure<Page<User>>>(rs, HttpStatus.OK);
 	}
 	
+	
+	/*  PAGE-SORT USERS  */
 	@GetMapping("/users/page-sort")
 	public ResponseEntity<ResponseStructure<Page<User>>> pageSortUsers(@RequestParam int page, @RequestParam int size, @RequestParam String sortBy, @RequestParam String direction) {
 		Page<User> usersPageSort = service.pageSortUsers(page, size, sortBy, direction);

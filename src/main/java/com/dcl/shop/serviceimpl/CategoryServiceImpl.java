@@ -18,14 +18,17 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 @Service
 public class CategoryServiceImpl implements CategoryService {
-
 	private final CategoryRepository repository;
 
+	
+	/*  ADD CATEGORY  */
 	@Override
 	public Category addCategory(Category category) {
 		return repository.save(category);
 	}
 
+	
+	/* DISPLAY ALL CATEGORIES  */
 	@Override
 	public List<Category> displayAllCategories() {
 		List<Category> list = repository.findAll();
@@ -37,6 +40,8 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 	}
 
+	
+	/* DISPLAY CATEGORY BY CATEGORY ID  */
 	@Override
 	public Category displayCatgoryById(int category_id) {
 		Optional<Category> optional = repository.findById(category_id);
@@ -48,6 +53,8 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 	}
 
+	
+	/*  UPDATE CATEGORY BY CATEGORY ID  */
 	@Override
 	public Category updateCategoryById(int category_id, Category updatedCategory) {
 		Optional<Category> optional = repository.findById(category_id);
@@ -61,6 +68,8 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 	}
 
+	
+	/*  DELETE CATEGORY BY CATEGORY ID  */
 	@Override
 	public Category deleteCategoryById(int category_id) {
 		Optional<Category> optional = repository.findById(category_id);
@@ -74,6 +83,8 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 	}
 
+	
+	/*  FIND CATEGORY BY CATEGORY NAME  */
 	@Override
 	public Category findCategoryByName(String category_name) {
 		Optional<Category> optional = repository.findByCategoryName(category_name);
@@ -85,6 +96,8 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 	}
 
+	
+	/*  SEARCH CATEGORY BY KEYWORD  */
 	@Override
 	public List<Category> searchCategoryByKeyword(String categoryName) {
 		List<Category> list = repository.findByCategoryNameContaining(categoryName);
@@ -96,6 +109,8 @@ public class CategoryServiceImpl implements CategoryService {
 		}
 	}
 
+	
+	/*  CHECK CATEGORY EXISTS BY CATEGORY NAME  */
 	@Override
 	public boolean findCategoryExists(String categoryName) {
 	    return repository.existsByCategoryName(categoryName);

@@ -29,11 +29,15 @@ public class CartServiceImpl implements CartService {
 	private final ProductRepository productRepository;
 	private final CartItemRepository cartItemRepository;
 
+	
+	/*  ADD CART  */
 	@Override
 	public Cart addCart(Cart cart) {
 		return cartRepository.save(cart);
 	}
 
+	
+	/*  GET CART BY USER ID  */
 	@Override
 	public Cart getCartByUserId(int userId) {
 		Optional<Cart> optional = cartRepository.findByUser_UserId(userId);
@@ -45,6 +49,7 @@ public class CartServiceImpl implements CartService {
 		}
 	}
 
+	
 	/* ************************************* IMPORTANT ************************************* */
 	/* ADD PRODUCT TO CART */
 	@Override
@@ -178,8 +183,8 @@ public class CartServiceImpl implements CartService {
 	        throw new CartNotFoundByCartIdException("NO CART FOUND");
 	    }
 	    Cart cart = optional.get();
+	    
 	    CartResponseDTO dto = new CartResponseDTO();
-
 	    dto.setCartId(cart.getCartId());
 	    dto.setUserId(cart.getUser().getUserId());
 	    dto.setUserName(cart.getUser().getName());
@@ -196,7 +201,6 @@ public class CartServiceImpl implements CartService {
 	        itemDTO.setProductId(cartItem.getProduct().getProductId());
 	        itemDTO.setProductName(cartItem.getProduct().getProductName());
 	        itemDTO.setBrand(cartItem.getProduct().getBrand());
-
 	        itemDTO.setQuantity(cartItem.getQuantity());
 	        itemDTO.setPrice(cartItem.getPrice());
 
@@ -211,6 +215,8 @@ public class CartServiceImpl implements CartService {
 	    return dto;
 	}
 
+	
+	/* CLEAR CART */
 	@Override
 	public Cart clearCart(int cartId) {
 		Optional<Cart> optional = cartRepository.findById(cartId);
