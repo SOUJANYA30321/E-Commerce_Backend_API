@@ -15,9 +15,13 @@ import com.dcl.shop.exceptions.ProductNotFoundByBrandException;
 import com.dcl.shop.exceptions.ProductNotFoundByCategoryException;
 import com.dcl.shop.exceptions.ProductNotFoundByCategoryNameException;
 import com.dcl.shop.exceptions.ProductNotFoundByProductIdException;
+import com.dcl.shop.exceptions.ProductReviewAlreadyExistsException;
 import com.dcl.shop.exceptions.ProductNotFoundByNameException;
 import com.dcl.shop.exceptions.ProductNotFoundByPriceRangeException;
 import com.dcl.shop.exceptions.ProductsNotFoundException;
+import com.dcl.shop.exceptions.RatingRangeException;
+import com.dcl.shop.exceptions.ReviewNotFoundByReviewIdException;
+import com.dcl.shop.exceptions.ReviewNotFoundException;
 import com.dcl.shop.exceptions.UserNotFoundByUserIdException;
 import com.dcl.shop.exceptions.UserNotFoundEmailException;
 import com.dcl.shop.exceptions.UserNotFoundNameException;
@@ -292,6 +296,55 @@ public class GlobalExceptionHandler {
 		
 		es.setErrorCode(HttpStatus.NOT_FOUND.value());
 		es.setErrorMessage("No orders are present in the database.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	
+	
+	/* ************************************ REVIEW EXCEPTIONS ************************************ */
+	
+	
+	@ExceptionHandler(ReviewNotFoundException.class)
+	public ResponseEntity<ErrorStructure<String>> handleReviewNotFoundException(ReviewNotFoundException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("No reviews are present in the database.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(ReviewNotFoundByReviewIdException.class)
+	public ResponseEntity<ErrorStructure<String>> handleReviewNotFoundByReviewIdException(ReviewNotFoundByReviewIdException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("Review for the requested review Id is not available in the database.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(RatingRangeException.class)
+	public ResponseEntity<ErrorStructure<String>> handleRatingRangeException(RatingRangeException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("Please provide the valid ratings - between 1 and 5 only.");
+		es.setError(exception.getMessage());
+		
+		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
+	}
+	
+	@ExceptionHandler(ProductReviewAlreadyExistsException.class)
+	public ResponseEntity<ErrorStructure<String>> handleProductReviewAlreadyExistsException(ProductReviewAlreadyExistsException exception) {
+		ErrorStructure<String> es = new ErrorStructure<String>();
+		
+		es.setErrorCode(HttpStatus.NOT_FOUND.value());
+		es.setErrorMessage("Review already submitted for this product. Thank you.");
 		es.setError(exception.getMessage());
 		
 		return new ResponseEntity<ErrorStructure<String>>(es, HttpStatus.NOT_FOUND);
